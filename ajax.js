@@ -37,8 +37,53 @@
                 type:           ( availableType.indexOf(obj.type) !== -1 ? obj.type : null )                || "GET",
                 dataType:       ( availableDataType.indexOf(obj.dataType) !== -1 ? obj.dataType : null )    || "json"
             };
+            
+             /**
+             * Проверяет переменную на существование
+             * @returns {boolean}
+             */
+            function isset() {
+                var a  = arguments,
+                    l  = a.length,
+                    i  = 0,
+                    u  = undefined,
+                    uu = ''+u;
+        
+                while (i !== l) {
+                    if (a[i] === u || typeof a[i] === uu || a[i] === null) {
+                        return false;
+                    }
+                    i++;
+                }
+        
+                return true;
+            }
 
-        if (cbh.helpers.empty(args.url)) {
+            /**
+             * Проверяет переменную на пустоту
+             * @returns {boolean}
+             */
+            function empty()  {
+                var a  = arguments,
+                    l  = a.length,
+                    i  = 0,
+                    i2 = 0,
+                    u  = undefined,
+                    uu = ''+ u,
+                    ev = [u, false, ''],
+                    el = ev.length;
+                while (i !== l) {
+                    for (i2 = 0; i2 < el; i2++) {
+                        if (typeof a[i] === uu || a[i] === ev[i2] || a[i].length === 0) {
+                            return true;
+                        }
+                    }
+                    i++;
+                }
+                return false;
+            }
+
+        if (empty(args.url)) {
             return;
         }
 
